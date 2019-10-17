@@ -1,0 +1,13 @@
+{% for q in questions  %}
+<li>
+<a href="{% url 'questions:question-detail' q.id %}">
+<h5>{{q.question_text}}</h5></a>
+{% for solvd in userP.questions_solved.all%}
+{% if solvd.id == q.id %}
+<p>solved</p>
+{% else %}
+{% endif %}
+
+{% endfor %}
+</li>
+{% endfor %}

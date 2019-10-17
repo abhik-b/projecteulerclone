@@ -1,0 +1,15 @@
+<h3>{{question.question_text}}</h3>
+<h5>difficulty level:{{question.difficulty_level}}</h5>
+
+{% if not solved %}
+<form action="{% url 'questions:checkanswer' question.id %}" method="post">
+{% csrf_token %}
+    <label for="ans">Your Answer: </label>
+    <input id="ans" type="text" name="ans" value="{{ anser }}">
+    <input type="submit" value="OK">
+</form>
+{% else %}
+<h3>you solved this</h3>
+<h2>{{question.answer_text}}</h2>
+{% endif %}
+
