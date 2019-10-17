@@ -18,7 +18,10 @@ from django.http import HttpResponse
 #     context_object_name = 'question'
 def questionListView(request):
     questions = Question.objects.all()
-    userP = Profile.objects.get(user=request.user)
+    userP = ''
+    if request.user.is_authenticated:
+
+        userP = Profile.objects.get(user=request.user)
     # solved = False
     # for question_solved in user.questions_solved.all():
     #     if question_solved.id == question.id:
@@ -35,12 +38,14 @@ def questionListView(request):
 
 def questionDetailView(request, id):
     question = Question.objects.get(id=id)
-    user = Profile.objects.get(user=request.user)
-    solved = False
-    for question_solved in user.questions_solved.all():
-        if question_solved.id == question.id:
-            solved = True
-            print(solved, 'solved')
+    solved = ''
+    if request.user.is_authenticated:
+        user = Profile.objects.get(user=request.user)
+        solved = False
+        for question_solved in user.questions_solved.all():
+            if question_solved.id == question.id:
+                solved = True
+                print(solved, 'solved')
 
     context = {
         'solved': solved,

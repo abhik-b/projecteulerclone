@@ -1,3 +1,4 @@
+{% if user.is_authenticated %}
 {% for q in questions  %}
 <li>
 <a href="{% url 'questions:question-detail' q.id %}">
@@ -11,3 +12,12 @@
 {% endfor %}
 </li>
 {% endfor %}
+{% else %}
+{% for q in questions  %}
+<li>
+<a href="{% url 'questions:question-detail' q.id %}">
+<h5>{{q.question_text}}</h5></a>
+</li>
+{% endfor %}
+{% endif %}
+
