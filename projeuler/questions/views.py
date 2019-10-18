@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Question
 from users.models import Profile
 from django.http import HttpResponse
+from .forms import QuestionForm
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
 
 
@@ -72,3 +76,17 @@ def checkAnswer(request, id):
         right = False
     context = {'right': right}
     return render(request, 'ansercheck.html', context)
+
+
+@login_required
+def createQuestion(request):
+
+    if request.method == "POST":
+        form = QuestionForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect('questions:question-list')
+    form = QuestionForm()
+    return render(request, 'question_form.html', context={
+        'form': form
+    })

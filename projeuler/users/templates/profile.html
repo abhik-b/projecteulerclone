@@ -2,3 +2,7 @@ hello {{userprofile.user.username}}
 <br>
 problems solved {{userprofile.problems_solvd}}out of {{userprofile.qcount}}problems
 <h1>{{userprofile.progress}}% </h1>
+<h1>{% for a in userprofile.achievments_completed %}
+{{a.title}}
+<br>
+{% endfor %}</h1>

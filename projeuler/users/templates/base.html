@@ -2,7 +2,11 @@
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">logout</a></p>
   <p><a href="{% url 'users:profile' %}">profile</a></p>
-
+  {% if request.user.is_staff %}
+  <p><a href="{% url 'questions:question-create' %}">create</a></p>
+  {% else %}
+  be a member of our community ! email us
+  {% endif %}
 {% comment %} {% if user.is_staff%}
 u r superuser
 {% endif %} {% endcomment %}

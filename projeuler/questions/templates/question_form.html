@@ -1,0 +1,13 @@
+
+{% if request.user.is_staff %}
+wlcm {{request.user}} 
+<h2>QUestion</h2>
+<form method='post'>
+{% csrf_token %}
+{{form.as_p}}
+<button type='submit'>submit</button>
+</form>
+{% else %}
+email us to be a proud member of us
+{% endif %}
+
